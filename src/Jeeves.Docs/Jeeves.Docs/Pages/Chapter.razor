@@ -1,0 +1,250 @@
+﻿@page "/Chapter/{ChapterId}"
+
+<div class="col-9">
+    <div class="mb-3">
+        @{
+            if (Settings.Breadcrumbs != null && Settings.Breadcrumbs.Count != 0)
+            {
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        @for (int i = Settings.Breadcrumbs.Count - 1; i >= 0; i--)
+                        {
+                            var currentNodeInfo = Settings.Breadcrumbs[i];
+                            <li class="breadcrumb-item active">
+                                @if (i != 0)
+                                {
+                                    <a class="bread-crumb-item" @onclick="@(() => SelectNode(currentNodeInfo.Text))" href="/">
+                                        @currentNodeInfo.Text
+                                    </a>
+                                }
+                                else
+                                {
+                                    @currentNodeInfo.Text
+                                }
+                            </li>
+                        }
+                    </ol>
+                </nav>
+            }
+        }
+        <div class="chapter-first-heading">@ChapterContents?.Description</div>
+        <div class="mt-3">
+            <content class="chapter-body">@ChapterContents?.Revision</content>
+        </div>
+        <div class="chapter-body mt-3">@ChapterContents?.Documentation</div>
+        @if (ChapterContents?.ChapterImages != null && ChapterContents?.ChapterImages.Count > 0)
+        {
+            foreach (var chapterImage in ChapterContents.ChapterImages)
+            {
+                <img src=@string.Concat("Assets/", Settings.Language, "/" , chapterImage.ImagePath, chapterImage.ImageName) alt="@LocaleStaticTexts.ImageNotFound" class="mt-3 d-block" />
+            }
+        }
+        @if (ChapterContents?.Sections != null && ChapterContents.Sections.SectionCollection.Count > 0)
+        {
+            var sections = ChapterContents.Sections;
+            @foreach (var sec in sections.SectionCollection)
+            {
+                <div id="@Regex.Replace(sec.SerialNo + sec.Name ?? string.Empty, @"[^0-9a-zA-Z]+", string.Empty)" class="mt-3">
+                    <div class="chapter-second-heading">@sec.SerialNo @sec.Name</div>
+                    <div class="chapter-body mt-3">@sec.Description</div>
+                    @if (sec?.SectionImages != null && sec?.SectionImages.Count > 0)
+                    {
+                        foreach (var sectionImage in sec.SectionImages)
+                        {
+                            <img src=@string.Concat("Assets/", Settings.Language, "/" ,sectionImage.ImagePath, sectionImage.ImageName) alt="@LocaleStaticTexts.ImageNotFound" class="mt-3 d-block" />
+                        }
+                    }
+                </div>
+                if (sec.SubSections != null && sec.SubSections.SubSectionCollection.Count > 0)
+                {
+                    @foreach (var subSection in sec.SubSections.SubSectionCollection)
+                    {
+                        if (subSection.SubType == LocaleStaticTexts.RelevantImportantFields)
+                        {
+                            <div class="chapter-subsection-heading mt-3">@LocaleStaticTexts.RelevantImportantFields</div>
+                        }
+
+                        var name = string.IsNullOrWhiteSpace(subSection.Name) ? subSection.SubName : subSection.Name;
+                        <div id="@Regex.Replace(subSection.SerialNo + name ?? string.Empty, @"[^0-9a-zA-Z]+", string.Empty)" class="mt-3">
+                            <div class="chapter-subsection-heading">
+                                @subSection.SerialNo
+                                @if (!string.IsNullOrWhiteSpace(subSection.Name))
+                                {
+                                    if (!string.IsNullOrWhiteSpace(subSection.SerialNo))
+                                    {
+                                        <span class="ml-2">@subSection.Name</span>
+                                        if (subSection.SubType != "Chapter")
+                                        {
+                                            if (!string.IsNullOrWhiteSpace(subSection.SubName))
+                                            {
+                                                <div class="mt-3"></div>
+                                                if (subSection.SubType == "Report")
+                                                {
+                                                    @LocaleStaticTexts.PrintReport
+                                                    <span class="ml-2"></span>
+                                                }
+                                                @subSection.SubName
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @subSection.Name
+                                        if (subSection.SubType == "Report")
+                                        {
+                                            <div class="mt-3"></div>
+                                            @LocaleStaticTexts.PrintReport
+                                            if (!string.IsNullOrWhiteSpace(subSection.SubName))
+                                            {
+                                                <span class="ml-2"></span>
+                                                @subSection.SubName
+                                            }
+                                        }
+                                    }
+                                    <span class="ml-2"></span>
+                                }
+                                else
+                                {
+                                    if (subSection.SubType == "Report")
+                                    {
+                                        if (subSection.SerialNo != null)
+                                        {
+                                            <span class="ml-2"></span>
+                                        }
+                                        @LocaleStaticTexts.PrintReport
+                                        <span class="ml-2"></span>
+                                    }
+                                    if (subSection.SubType != "Chapter")
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(subSection.SubName))
+                                        {
+                                            if (subSection.SerialNo != null)
+                                            {
+                                                <span class="ml-2">@subSection.SubName</span>
+                                            }
+                                            else
+                                            {
+                                                @subSection.SubName
+                                            }
+                                            <span class="ml-2"></span>
+                                        }
+                                    }
+                                }
+
+                                @switch (subSection.SubType)
+                                {
+                                    case "Chapter":
+                                        if (string.IsNullOrWhiteSpace(subSection.Description))
+                                        {
+                                            if (string.IsNullOrWhiteSpace(subSection.SubName))
+                                            {
+                                                <a href="/@subSection.SubType/@subSection.SubId">@subSection.SubName</a>
+                                            }
+                                            else
+                                            {
+                                                <div class="mt-3"></div>
+                                                <a href="/@subSection.SubType/@subSection.SubId">@subSection.SubName</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="chapter-body mt-3">@subSection.Description</div>
+                                            <div class="mt-3"></div>
+                                            <a href="/@subSection.SubType/@subSection.SubId">@subSection.SubName</a>
+                                        }
+                                        break;
+                                    case "Program":
+                                        <a href="/@subSection.SubType/@subSection.SubId">@string.Concat("(", LocaleStaticTexts.ProgramTitle, subSection.SubId, ")")</a>
+                                        break;
+                                    case "Field":
+                                        <a class="ml-2" href="/@subSection.SubType/@subSection.SubId">@string.Concat("(", LocaleStaticTexts.FieldTitle, subSection.SubId, ")")</a>
+                                        if (subSection.SubName != null)
+                                        {
+                                            <br />
+                                            <div class="mt-3 chapter-body">@subSection.SubId  =  <b>@subSection.SubName</b></div>
+                                        }
+                                        break;
+                                    case "Table":
+                                        <a href="/@subSection.SubType/@subSection.SubId">@string.Concat("(", LocaleStaticTexts.TableTitle, subSection.SubId, ")")</a>
+                                        break;
+                                    case "Report":
+                                        <a href="/@subSection.SubType/@subSection.SubId">@string.Concat("(", subSection.SubId, ")")</a>
+                                        break;
+                                }
+                            </div>
+                        </div>
+
+                        @if (subSection.SubType != "Chapter" && !string.IsNullOrWhiteSpace(subSection.Description))
+                        {
+                            <div class="chapter-body mt-3">@subSection.Description</div>
+                        }
+
+                        @if (subSection.SubType == "Field" && subSection?.Records != null && subSection.Records.RecordCollection.Count > 0)
+                        {
+                            <RecordsGrid Records="@subSection.Records" RenderPage="Chapter" />
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(subSection.SubDescription))
+                        {
+                            <div class="chapter-body mt-3">@subSection.SubDescription</div>
+                        }
+
+                        @if (subSection?.SubSectionImages != null && subSection?.SubSectionImages.Count > 0)
+                        {
+                            foreach (var subSectionImage in subSection.SubSectionImages)
+                            {
+                                <img src=@string.Concat("Assets/", Settings.Language, "/" , subSectionImage.ImagePath, subSectionImage.ImageName) alt="@LocaleStaticTexts.ImageNotFound" class="mt-3 d-block" />
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        <div class="d-flex justify-content-center mt-3">
+            <button type="button" class="btn scrollToTop"  @onclick="@ScrollToTop" title="@LocaleStaticTexts.ScrollToTopTitle">@LocaleStaticTexts.ScrollToTop</button>
+        </div>
+    </div>
+</div>
+@if (ChapterContents?.Sections != null && ChapterContents.Sections.SectionCollection.Count > 0)
+{
+    var sections = ChapterContents.Sections;
+    <div class="col-3 ml-n2">
+        <div class="position-fixed chapter-navigation-menu overflow-auto mr-4" id="navigation-menu">
+            <div class="ml-3 mb-3">
+                <div class="chapter-second-heading mt-3">Content</div>
+                <ul class="nav mr-3 chapter-menu">
+                    @foreach (var sec in sections.SectionCollection)
+                    {
+                        if (!string.IsNullOrWhiteSpace(sec.Name) && !string.IsNullOrWhiteSpace(sec.SerialNo))
+                        {
+                            <li class="w-100 mt-3">
+                                <a href="@("#" + Regex.Replace(sec.SerialNo + sec.Name ?? string.Empty, @"[^0-9a-zA-Z]+", string.Empty))" @onclick='() => NavigateToHtmlElement("#" + Regex.Replace(sec.SerialNo + sec.Name, "[^0-9a-zA-Z]+", string.Empty))' @onclick:preventDefault>
+                                    @sec.SerialNo @sec.Name
+                                </a>
+                            </li>
+                        }
+                        if (sec.SubSections != null && sec.SubSections.SubSectionCollection.Count > 0)
+                        {
+                            @foreach (var subSection in sec.SubSections.SubSectionCollection)
+                            {
+                                var name = subSection.Name;
+                                if (string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(subSection.SubName))
+                                {
+                                    name = subSection.SubName;
+                                }
+                                @if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(subSection.SerialNo))
+                                {
+                                    <li class="w-100 mt-3 ml-3">
+                                        <a href="@("#" + Regex.Replace(subSection.SerialNo + name, @"[^0-9a-zA-Z]+", string.Empty))" @onclick='() => NavigateToHtmlElement("#" + Regex.Replace(subSection.SerialNo + name, "[^0-9a-zA-Z]+", string.Empty))' @onclick:preventDefault>
+                                            @subSection.SerialNo @name
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

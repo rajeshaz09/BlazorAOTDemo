@@ -1,0 +1,226 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+:root {
+    --dark-slate-blue: #1e4454;
+    --black: #333333;
+    --devexpress-black: #212529;
+    --white: #ffffff;
+    --dropdown-black: #2C2C2C;
+    --grey: #989FA5;
+    --dark-blue: #305261;
+    --white: #FFFFFF;
+    --lightGray: lightgray;
+    --slateGray: #70a3b2;
+    --treeViewHoverColor: #325463;
+    --chapter-navigation-menu: #d5d5d54d;
+}
+
+body {
+    font-family: 'Trebuchet MS';
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -1.06px;
+    color: var(--black);
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.language {
+    opacity: 0.3;
+}
+
+.version{
+   width:37px;
+}
+
+.language-text {
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 20px;
+    color: var(--grey);
+}
+
+.dxbs-menu .dx-menu-item .dropdown-toggle.right:after {
+    transform: rotate( 0deg ) !important;
+}
+
+.dropdown-menu.dx-dropdown-menu.show.border-inherit {
+    transform: none !important;
+}
+
+li.dx-menu-item :hover {
+    cursor: pointer;
+}
+
+.dxbs-menu div.nav .dx-nav-menu-bar > a.nav-link.selected:before, .dxbs-menu .dx-menu-item > a.selected:not(disabled):not(.mute-selection):before {
+    background-color:var(--white)!important;
+}
+
+.splash-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    height: 100vh;
+    font-family: "Segoe UI",Roboto,"Helvetica Neue","-apple-system",BlinkMacSystemFont,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: .88rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.splash-screen .spinner-border {
+    border: .2em solid;
+    border-color: #5f368d #bfbfbf #bfbfbf;
+    width: 120px;
+    height: 120px;
+}
+
+.splash-screen-caption {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.splash-screen-text {
+    color: #a1a1a1;
+    margin-top: .5rem;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    height:120px;
+    background-color: var(--lightGray);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: var(--white);
+    background-color: var(--treeViewHoverColor);
+}
+
+.nav-item {
+    margin-top: 5px;
+}
+
+.dxbs-gridview {
+    height: 90%;
+}
+
+.dxbs-gridview > .card {
+    display: flex !important;
+    height: 100%;
+}
+
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD {
+    flex-grow: 1;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+
+.dxbs-gridview.dxbs-has-vertical-scrollbar.dxbs-vertical-scrollbar-visible > .card > .dxgvHSDC.dxbs-scrollbar-padding {
+    height: auto;
+    padding-right: 0!important;
+
+}
+
+.dxbs-empty-data-row {
+    visibility: hidden;
+}
+
+.table-bordered td, .table-bordered th, .table-bordered tr {
+    border-color: var(--slateGray);
+    padding: 9px;
+    border-bottom: 1px solid var(--slateGray);
+    border-right: 0
+}
+
+.row-data{
+    cursor:pointer;
+}
+
+.row-data:hover {
+    background-color: var(--treeViewHoverColor);
+    color:var(--white);
+}
+
+.row-data:nth-child(even) {
+    background-color: var(--slateGray);
+}
+
+.records-grid:nth-child(even) {
+    background-color: var(--slateGray);
+}
+
+.dxbs-pager .pagination > li > a {
+    background-color: var(--white);
+    color: var(--slateGray);
+    border-color: var(--slateGray);
+}
+
+.dxbs-pager .pagination > li.active > a {
+    background-color: var(--slateGray);
+    color: var(--white);
+    border-color: var(--white);
+}
+
+
+.card {
+    border: 1px solid var(--slateGray);
+}
+
+.dxbs-gridview .dxbs-nlb, .dxbs-gridview > .card .dxbs-table > thead > tr > th {
+    border-color: white;
+}
+
+.dxbs-gridview .dxbs-nlb, .dxbs-gridview > .card .dxbs-table > thead {
+    background-color: var(--slateGray);
+    color: var(--white);
+    font-size: 20px;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td, .dxbs-gridview > .card .dxbs-table > thead > tr > th {
+    vertical-align: middle;
+    height: 100%;
+    white-space: normal;
+}
+
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-noclick, .dxbs-gridview > .card .dxbs-table > thead > tr.dxbs-filter-row > td, .dxbs-th.card > .card-body.dxbs-noclick {
+    border-color: var(--white);
+    cursor: pointer;
+}
+
+.dxbs-gridview .dxbs-fixed .dxbs-fixed-header-content > a {
+    font-weight: normal;
+}
+
+.menu-link {
+    color: var(--devexpress-black);
+}
+
+.menu-link:hover {
+    color: var(--devexpress-black);
+}

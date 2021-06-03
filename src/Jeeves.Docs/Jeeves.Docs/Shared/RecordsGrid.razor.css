@@ -1,0 +1,12 @@
+﻿.recordsGrid-second-heading {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -0.17px;
+}
+
+.recordsGrid-body {
+    font-size: 16px;
+    line-height: 1.38;
+    height:100%;
+    white-space: pre-wrap;
+}

@@ -1,0 +1,146 @@
+﻿@using DevExpress.Blazor;
+@using Jeeves.DocsAgent.Models;
+
+<div class="row m-0 position-absolute h-100 w-100">
+    <div class="row m-0 w-100 navbar-brand-container">
+        <div class="mt-auto navbar-brand-logo">
+            <a href="/" class="home-link">
+                <img src="/images/jeeves.png" class="logo-image" />
+                <span class="brand-name">JEEVES</span>
+            </a>
+        </div>
+    </div>
+    <div class="row m-0 w-100 navbar-search-container">
+        <div class="navbar-search-filter">
+            <DxTextBox @bind-Text="@FilterText"
+                       NullText=@LocaleStaticTexts.FilterText
+                       SizeMode="SizeMode.Medium"
+                       BindValueMode="BindValueMode.OnInput"
+                       ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
+            </DxTextBox>
+        </div>
+    </div>
+    @if (!_showToc)
+    {
+        if (FilteredItems.Count == 0)
+        {
+            <div class="navbar-search-results">@LocaleStaticTexts.NoResultsFound</div>
+        }
+        else
+        {
+            <div class="navbar-search-results">@LocaleStaticTexts.ResultHits @FilteredItems.Count</div>
+        }
+    }
+    <div class="row w-100 overflow-auto navbar-data-tree">
+        @if (_showToc)
+        {
+            <DxTreeView @ref="@TreeView"
+                        Data="@Toc?.DocItems"
+                        LoadChildNodesOnDemand="true"
+                        AllowSelectNodes="true"
+                        TextExpression="@(dataItem => (dataItem as DocItem).Description)"
+                        HasChildrenExpression="@(dataItem => (dataItem as DocItem).DocItems.Any())"
+                        ChildrenExpression="@(dataItem => (dataItem as DocItem).DocItems)"
+                        NavigateUrlExpression="@(dataItem => GetRoutingPath(dataItem as DocItem))"
+                        SelectionChanged="@SelectionChanged">
+                <NodeTextTemplate>
+                    @{
+                        var dataItem = context.DataItem as DocItem;
+                        @if (dataItem.DocItemType != DocItemType.DocLevel)
+                        {
+                            <div class="toc-leaf-nodes">@dataItem.Description</div>
+                        }
+                        else
+                        {
+                            <div>@dataItem.Description</div>
+                        }
+                    }
+                </NodeTextTemplate>
+            </DxTreeView>
+        }
+        else
+        {
+            @if (FilteredItems.Count != 0)
+            {
+                <div class="card card-container">
+                    <ul class="list-group list-group-flush">
+                        <Virtualize Items="@FilteredItems">
+                            @{
+                                var dataItem = context as DocItem;
+                                <li class="list-group-item">
+                                    <div class="d-flex flex-column">
+                                        <a class="nav-item-link" href=@(GetNavigationUrl(dataItem))>
+                                            <div class="mt-2">@dataItem.Description</div>
+                                        </a>
+                                        <div class="mt-2 doc-type">@dataItem.DocItemType</div>
+                                    </div>
+                                </li>
+                            }
+                        </Virtualize>
+                    </ul>
+                </div>
+            }
+
+            @*<Virtualize Items="@FilteredItems">
+                    @{
+                        var dataItem = context as DocItem;
+                        <div style="width:100%">
+                            <div>@dataItem.Description</div>
+                            <div>@dataItem.DocItemType</div>
+                        </div>
+                    }
+                </Virtualize>*@
+            @*<DxDataGrid Data="@FilteredItems"
+                            DataNavigationMode="DataGridNavigationMode.VirtualScrolling"
+                            ShowColumnHeaders="false"
+                            SelectionMode="DataGridSelectionMode.SingleSelectedDataRow"
+                            >
+
+                    <DxDataGridColumn Field="@nameof(DocItem.Description)">
+                        <DisplayTemplate>
+                            @{
+                                var dataItem = context as DocItem;
+                                <div class="d-flex flex-column">
+                                    <div class="mt-2">@dataItem.Description</div>
+                                    <div class="mt-2 doc-type">@dataItem.DocItemType</div>
+                                </div>
+
+                            }
+                        </DisplayTemplate>
+                    </DxDataGridColumn>
+
+                </DxDataGrid>*@
+
+            @*@code{
+                    private IEnumerable<DocItem> Values { get; set; } = new List<DocItem>();
+                }
+                <DxListBox Data="@FilteredItems"
+                           TextFieldName="@nameof(DocItem.Description)"
+
+                           ListRenderMode="ListRenderMode.Virtual"
+                           @bind-Values="@Values">
+                </DxListBox>*@
+
+
+
+            @*<DxTreeView Data="@FilteredItems"
+                            LoadChildNodesOnDemand="true"
+                            AllowSelectNodes="true"
+                            TextExpression="@(dataItem => (dataItem as DocItem).Description)"
+                            NavigateUrlExpression="@(dataItem => GetNavigationUrl(dataItem as DocItem))">
+                    <NodeTextTemplate>
+                        @{
+                            var dataItem = context.DataItem as DocItem;
+                            <div class="d-flex flex-column">
+                                <div class="mt-2">@dataItem.Description</div>
+                                <div class="mt-2 doc-type">@dataItem.DocItemType</div>
+                            </div>
+                        }
+                    </NodeTextTemplate>
+                </DxTreeView>*@
+
+
+        }
+
+    </div>
+</div>

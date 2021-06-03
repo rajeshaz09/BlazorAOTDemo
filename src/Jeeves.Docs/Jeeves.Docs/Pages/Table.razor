@@ -1,0 +1,32 @@
+﻿@page "/Table/{TableId}"
+<div class="table-div">
+    <h3 class="table-first-heading">@TableContents?.Description (@(TableContents?.Id??TableId))</h3>
+    <div>
+        <content class="table-body">@TableContents?.Content</content>
+    </div>
+    @if (TableContents?.Records != null && TableContents.Records.RecordCollection.Count > 0)
+    {
+        <RecordsGrid Records="@TableContents.Records" />
+    }
+    @if (TableContents?.Fields != null && TableContents.Fields.FieldCollection.Count > 0)
+    {
+        <FieldsGrid Fields="@TableContents.Fields" />
+    }
+    @if (TableContents?.Programs != null && TableContents.Programs.ProgramCollection.Count > 0)
+    {
+        var programs = TableContents.Programs;
+        <div class="mt-3 mb-3">
+            <h3 class="table-second-heading">@LocaleStaticTexts.ProgramsDescription</h3>
+            @foreach (var program in programs.ProgramCollection)
+            {
+                <div>
+                    <span class="table-links-text">@LocaleStaticTexts.ProgramTitle</span>
+                    <NavLink href=@("/program/"+ program.Id)>
+                        <content class="table-links">@program.Description</content>
+                    </NavLink>
+                    <content class="table-links-text">(@program.Id)</content>
+                </div>
+            }
+        </div>
+    }
+</div>

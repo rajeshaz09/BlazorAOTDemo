@@ -1,0 +1,84 @@
+﻿@page "/Program/{ProgramId}"
+
+<div class="program-div">
+    <div class="program-first-heading">@ProgramContents?.Description: (@(ProgramContents?.Id??ProgramId))</div>
+    <div class="program-second-heading mt-3">@LocaleStaticTexts.Description</div>
+    <div class="mt-3">
+        <content class="program-body">@ProgramContents?.Content</content>
+    </div>
+    @if (ProgramContents?.Records != null && ProgramContents.Records.RecordCollection.Count > 0)
+    {
+        <RecordsGrid Records="@ProgramContents.Records" />
+    }
+    @if (ProgramContents?.Chapters != null && ProgramContents.Chapters.ChapterCollection.Count > 0)
+    {
+        var chapters = ProgramContents.Chapters;
+        <div class="mt-3">
+            <h3 class="program-second-heading">@LocaleStaticTexts.ChaptersDescription</h3>
+        </div>
+        <ul>
+            @foreach (var chapter in chapters.ChapterCollection)
+            {
+                <li>
+                    <NavLink href=@("/chapter/"+ chapter.Id)>
+                        <content class="program-links">@chapter.Description</content>
+                    </NavLink>
+                </li>
+            }
+        </ul>
+    }
+    @if (ProgramContents?.Tables != null && ProgramContents.Tables.TableCollection.Count > 0)
+    {
+        var tables = ProgramContents.Tables;
+        <div class="mt-3">
+            <h3 class="program-second-heading">@LocaleStaticTexts.TableDescription</h3>
+        </div>
+        <ul>
+            @foreach (var table in tables.TableCollection)
+            {
+                <li>
+                    <NavLink href=@("/table/"+ table.Id)>
+                        <content class="program-links">@table.Description</content>
+                    </NavLink>
+                    <content class="program-links-text">(@table.Id)</content>
+                </li>
+            }
+        </ul>
+    }
+    @if (ProgramContents?.Reports != null && ProgramContents.Reports.ReportCollection.Count > 0)
+    {
+        var reports = ProgramContents.Reports;
+        <div class="mt-3">
+            <h3 class="program-second-heading">@LocaleStaticTexts.ReportsDescription</h3>
+        </div>
+        <ul>
+            @foreach (var report in reports.ReportCollection)
+            {
+                <li>
+                    <content class="program-links">@report.Description</content>
+                    <content class="program-links-text">(@report.Id)</content>
+                    <br/>
+                    <content class="program-links">@report.SubDescription</content>
+                </li>
+            }
+        </ul>
+    }
+    @if (ProgramContents?.Nodes != null && ProgramContents.Nodes.NodeCollection.Count > 0)
+    {
+        var nodes = ProgramContents.Nodes;
+        <div class="mt-3">
+            <h3 class="program-second-heading">@LocaleStaticTexts.NodesDescription</h3>
+        </div>
+        <ul>
+            @foreach (var node in nodes.NodeCollection)
+            {
+            <li>
+                <NavLink href=@("/program/"+ node.Id)>
+                    <content class="program-links-text">@node.Id</content>
+                </NavLink>
+                <content class="ml-2 program-links">@node.Description</content>              
+            </li>
+            }
+        </ul>
+    }
+</div>

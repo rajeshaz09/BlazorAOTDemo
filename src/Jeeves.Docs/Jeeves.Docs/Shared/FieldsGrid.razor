@@ -1,0 +1,15 @@
+﻿@using Jeeves.DocsAgent.Models;
+
+<div class="mt-3">
+    <h3 class="fieldsGrid-second-heading">@LocaleStaticTexts.FieldsDescription</h3>
+</div>
+<div class="fields-Grid">
+    <DxDataGrid @ref="FieldsDataGrid" Data="@Fields.FieldCollection" DataRowCssClass="row-data" CssClass="fieldsGrid-body" SelectionMode="DataGridSelectionMode.SingleSelectedDataRow" SingleSelectedDataRowChanged="@OnSelectedFieldChanged" DataNavigationMode="DataGridNavigationMode.Paging" PageSize="10">
+        <DxDataGridColumn Caption="@LocaleStaticTexts.Prompt" Field="@nameof(Field.Description)"></DxDataGridColumn>
+        <DxDataGridColumn Caption="@LocaleStaticTexts.DataName" Field="@nameof(Field.Id)" />
+        <DxDataGridColumn Caption="@LocaleStaticTexts.JeevesDataType" Field="@nameof(Field.JeevesDataType)" />
+        <DxDataGridColumn Caption="@LocaleStaticTexts.NumberOfCharacters" Field="@nameof(Field.Size)" />
+        <DxDataGridColumn Caption="@LocaleStaticTexts.DecimalPlaces" Field="@nameof(Field.Precision)" />
+        <DxDataGridColumn Caption="@LocaleStaticTexts.SQLDataType" Field="@nameof(Field.SQLDataType)" />
+    </DxDataGrid>
+</div>

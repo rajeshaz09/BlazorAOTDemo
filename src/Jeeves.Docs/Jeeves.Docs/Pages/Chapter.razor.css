@@ -1,0 +1,73 @@
+﻿.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    padding: 0px;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: var(--white);
+}
+
+.breadcrumb-item.active, .bread-crumb-item, .bread-crumb-item:hover {
+    color: var(--dark-slate-blue);
+}
+
+.chapter-first-heading {
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: -0.2px;
+}
+
+.chapter-second-heading {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -0.17px;
+}
+
+.chapter-subsection-heading {
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: -0.17px;
+}
+
+.chapter-body {
+    font-size: 17px;
+    line-height: 1.38;
+    white-space: pre-wrap;
+}
+
+.chapter-navigation-menu {
+    background-color: var(--chapter-navigation-menu);
+    height: 80%;
+    min-width:17%;
+}
+
+#navigation-menu::-webkit-scrollbar {
+    width: 7px;
+}
+
+#navigation-menu::-webkit-scrollbar-track-piece:end {
+    margin-bottom: 120px;
+}
+
+#navigation-menu::-webkit-scrollbar-track-piece:start {
+    margin-top: 120px;
+}
+
+.nav.chapter-menu > li > a {
+    word-break: break-word;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    color: var(--black);
+}
+
+.scrollToTop {
+    background-color: var(--chapter-navigation-menu);
+    color:var(--black);
+    font-size:21px;
+}

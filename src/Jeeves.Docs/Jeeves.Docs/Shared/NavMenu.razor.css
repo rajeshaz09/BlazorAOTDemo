@@ -1,0 +1,102 @@
+.table-of-contents {
+    opacity: 0.8;
+    font-size: 16px;
+    letter-spacing: -0.26px;
+    color: var(--white);
+    margin: 181px 0 16px;
+    height:770px;
+    overflow:auto;
+}
+
+.brand-name {
+    width: 111px;
+    height: 39px;
+    font-size: 32px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1.62px;
+    color: var(--white);
+}
+
+.logo-image{
+    width:53px;
+    height:46px;
+    margin-top:-10px;
+}
+
+.navbar-brand-container{
+    height:8%;
+}
+
+.navbar-brand-logo{
+    margin-left:32px;
+}
+
+.navbar-search-container{
+    height:9%;
+}
+
+.navbar-search-filter {
+    margin-left: 32px;
+    margin-right: 32px;
+    align-self: center;
+    width: 100%;
+}
+
+.navbar-search-results {
+    margin-left: 34px;
+    color: var(--white);
+    font-size: 18px;
+    margin-top: -15px;
+}
+
+.navbar-data-tree {
+    height: 83%;
+    opacity: 0.9;
+    letter-spacing: -0.26px;
+    color: var(--white);
+    font-size: 16px;
+    margin: 5px 0px 0px;
+}
+
+.home-link:hover{
+    text-decoration:none;
+}
+
+.doc-type {
+    font-size: 13px;
+    opacity: 0.7;
+    color: var(--white);
+}
+
+.card-container {
+    margin: 10px 23px 30px 32px;
+    width: 100%;
+    border: 0;
+    background-color: var(--dark-slate-blue);
+    border-radius: 8px;
+}
+
+.list-group-flush .list-group-item {
+    border: 1px solid var(--white);
+    border-radius:4px;
+    background-color:var(--dark-slate-blue);
+}
+
+.nav-item-link{
+    color: var(--white);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav-item-link:hover {
+    color: var(--white);
+    text-decoration:underline;
+}
+
+.toc-leaf-nodes{
+    margin-left: -30px;
+    margin-top: 12px;
+}

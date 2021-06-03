@@ -1,0 +1,19 @@
+﻿.doc-title {
+    font-size: 53px;
+    font-weight: normal;
+    letter-spacing: -1.06px;
+}
+
+.doc-subtitle {
+    font-size:18px;
+    margin-top:40px;
+    letter-spacing:-0.32px;
+}
+
+.doc-footer {
+    margin-top: auto;
+    text-align: left;
+    font-size: 17px;
+    color: var(--black);
+    letter-spacing: -1.08px;
+}

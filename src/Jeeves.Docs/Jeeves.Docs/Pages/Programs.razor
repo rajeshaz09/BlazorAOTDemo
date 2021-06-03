@@ -1,0 +1,17 @@
+﻿@page "/Programs"
+
+
+ @if (VisibleRowCount == 0)
+ {
+   <div class="mt-3 programs-grid-summary">@LocaleStaticTexts.NoResultsFound</div>
+ }
+ else
+ {
+   <div class="mt-3 programs-grid-summary">@LocaleStaticTexts.ResultHits @VisibleRowCount</div>
+ }
+
+<DxDataGrid  LayoutRestoring="@OnLayoutRestoring" LayoutChanged="@OnLayoutChanged" CustomData="@LoadCustomData" T="@DocsAgent.Models.Program" ShowFilterRow="true" CssClass="mt-2 program-grid" SelectionMode="DataGridSelectionMode.SingleSelectedDataRow" SingleSelectedDataRowChanged="@OnSelectedProgramChanged" DataRowCssClass="row-data" DataNavigationMode="DataGridNavigationMode.VirtualScrolling" PageSize="40">
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Program.Id)" Caption="@LocaleStaticTexts.DataName"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Program.Description)" Caption="@LocaleStaticTexts.ProgramName"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Program.Area)" Caption="@LocaleStaticTexts.Application"></DxDataGridColumn>
+</DxDataGrid>

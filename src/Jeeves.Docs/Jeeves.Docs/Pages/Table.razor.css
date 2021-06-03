@@ -1,0 +1,35 @@
+﻿.table-div {
+    position: absolute;
+    width:98%;
+}
+
+.table-first-heading {
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: -0.2px;
+}
+
+.table-second-heading {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -0.17px;
+}
+
+.table-body {
+    font-size: 17px;
+    line-height: 1.38;
+    white-space: pre-wrap;
+}
+
+.table-links {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.27px;
+    color: var(--light-navy);
+}
+
+.table-links-text {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.27px;
+}

@@ -1,0 +1,15 @@
+﻿@page "/Fields"
+
+@if (VisibleRowCount == 0)
+{
+    <div class="mt-3 fields-grid-summary">@LocaleStaticTexts.NoResultsFound</div>
+}
+else
+{
+    <div class="mt-3 fields-grid-summary">@LocaleStaticTexts.ResultHits @VisibleRowCount</div>
+}
+<DxDataGrid LayoutRestoring="@OnLayoutRestoring" LayoutChanged="@OnLayoutChanged" CustomData="@LoadCustomData" ShowFilterRow="true" CssClass="mt-2 field-grid" SelectionMode="DataGridSelectionMode.SingleSelectedDataRow" SingleSelectedDataRowChanged="@OnSelectedFieldChanged" Data="FieldCollection" DataRowCssClass="row-data" DataNavigationMode="DataGridNavigationMode.VirtualScrolling" PageSize="50">
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Field.Id)" Caption="@LocaleStaticTexts.DataName"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Field.Description)" Caption="@LocaleStaticTexts.Prompt"></DxDataGridColumn>
+    <DxDataGridColumn Field="@nameof(Jeeves.DocsAgent.Models.Field.ColumnHeader)" Caption="@LocaleStaticTexts.ColumnHeader"></DxDataGridColumn>
+</DxDataGrid>

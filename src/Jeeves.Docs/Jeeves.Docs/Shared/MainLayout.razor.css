@@ -1,0 +1,45 @@
+.doc-header {
+   height:18%;
+}
+
+.doc-content{
+   height:82%;
+   position:relative;
+   margin-left:33px;
+}
+
+.doc-content-container {
+    position:absolute;
+    overflow: scroll;
+    overflow-x:hidden;
+}
+
+.nav-menu {
+    background-color: var(--dark-slate-blue);
+}
+
+.language-menu {
+    height: 44px;
+    border-radius: 4px;
+    margin-right: 32px;
+    margin-top: 20px;
+}
+
+.dropdown-dialog {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 17px;
+}
+
+.dropdown-menu-item {
+    height: 44px;
+    border-radius: 4px;
+    margin:5px;
+    color:var(--dropdown-black);
+}
+
+.dropdown-menu-item:hover{
+    background-color:var(--dark-blue);
+    color:var(--white);
+}

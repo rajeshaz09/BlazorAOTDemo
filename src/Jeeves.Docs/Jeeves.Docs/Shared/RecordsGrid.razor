@@ -1,0 +1,18 @@
+﻿@using Jeeves.DocsAgent.Models;
+
+<div class="mt-3">
+    @if (RenderPage != "Chapter")
+    {
+      <h3 class="recordsGrid-second-heading">@LocaleStaticTexts.RecordsDescription</h3>
+    }
+</div>
+<div class="records-Grid">
+    <DxDataGrid @ref="@RecordsDataGrid" ColumnResizeMode="DataGridColumnResizeMode.NextColumn" SelectionMode="DataGridSelectionMode.None" Data="@Records.RecordCollection" DataRowCssClass="records-grid"  CssClass="recordsGrid-body" DataNavigationMode="DataGridNavigationMode.Paging" PageSize="10">
+        <DxDataGridColumn Width="33%" Field="@nameof(Record.Id)" Caption=@string.Concat(Records.TermKeyPrompt, "  (", Records.TermKey, ")") />
+        <DxDataGridColumn Width="33%" Field="@nameof(Record.Name)" Caption=@string.Concat(Records.TermDescPrompt, "  (", Records.TermDesc, ")")/>
+        @if (IsDescriptionPresented)
+        {
+        <DxDataGridColumn Width="34%" Field="@nameof(Record.Description)" Caption="@LocaleStaticTexts.Description"/>
+        }
+    </DxDataGrid>
+</div>

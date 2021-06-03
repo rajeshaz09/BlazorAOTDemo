@@ -1,0 +1,11 @@
+﻿@page "/Error"
+<div class="d-flex h-100 w-100 align-items-center flex-column">
+    <div class="alert alert-danger w-100 mr-4">
+        <div class="error-header">@LocaleStaticTexts.ErrorHeader</div>
+        <div class="error-message mt-3">@LocaleStaticTexts.ErrorMessage</div>
+        @if (!string.IsNullOrWhiteSpace(RequestPath))
+        {
+            <div class="mt-3 error-information">@LocaleStaticTexts.ErrorRequest @RequestPath</div>
+        }
+    </div>
+</div>

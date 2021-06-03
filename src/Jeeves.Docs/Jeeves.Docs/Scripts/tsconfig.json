@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ES6",
+    "outDir": "../wwwroot/js/jeeves.docs"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}

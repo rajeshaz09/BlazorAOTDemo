@@ -1,0 +1,80 @@
+﻿@inherits LayoutComponentBase
+
+<div class="container-fluid p-0 position-fixed w-100 h-100 bg-doc-color">
+    <div class="row m-0 h-100">
+        <div class="col-md-3 p-0 col-lg-3 nav-menu">
+            <NavMenu Toc="@Toc" />
+        </div>
+
+        <div class="col-md-9 p-0 col-lg-9">
+            <div class="row w-100 h-100 m-0">
+                <div class="row m-0 w-100 doc-header">
+                    <div class="d-flex flex-row w-100">
+                        <div class="flex-grow-1"></div>
+                        <div class="d-flex flex-row justify-content-around language-menu mr-n4">
+                            <DxMenu Orientation="Orientation.Vertical"
+                                    DropDownActionMode="MenuDropDownActionMode.Click"
+                                    ItemsPosition="ItemPosition.End">
+                                <Items>
+                                    <DxMenuItem @ref="VersionMenuItem" CssClass="language-text" IconCssClass="version" IconUrl="/images/jeeves-logo.png">
+                                        <Items>
+                                            @if (Versions != null && Versions.VersionCollection.Count > 0)
+                                            {
+                                                @foreach (var version in Versions.VersionCollection)
+                                                {
+                                                    <DxMenuItem Click="HandleVersionMenuItemClick" Text="@version.VersionNumber">
+                                                        <Template>
+                                                            @{
+                                                                <div class="d-flex h-100 m-2 p-2 dropdown-dialog dropdown-menu-item">
+                                                                    <img src="/images/jeeves-logo.png" class="align-self-center" width="35" />
+                                                                    <span class="align-self-center ml-3">@version.VersionDescription</span>
+                                                                </div>
+                                                            }
+                                                        </Template>
+                                                    </DxMenuItem>
+                                                }
+                                            }
+                                        </Items>
+                                    </DxMenuItem>
+                                </Items>
+                            </DxMenu>
+                        </div>
+                        <div class="d-flex ml-3 flex-row justify-content-around language-menu">
+                            <DxMenu Orientation="Orientation.Vertical"
+                                    DropDownActionMode="MenuDropDownActionMode.Click"
+                                    ItemsPosition="ItemPosition.End">
+                                <Items>
+                                    <DxMenuItem @ref="LanguageMenuItem" CssClass="language-text" IconCssClass="language" IconUrl="/images/language.svg">
+                                        <Items>
+                                            <DxMenuItem Click="HandleLanguageMenuItemClick" Text="@HomePageStaticTexts.Swedish">
+                                                <Template>
+                                                    <div title="@HomePageStaticTexts.Swedish" class="d-flex justify-content-around dropdown-dialog dropdown-menu-item">
+                                                        <img src="/images/sweden.png" class="align-self-center" width="24" height="24" />
+                                                        <span class="align-self-center">@HomePageStaticTexts.Swedish</span>
+                                                    </div>
+                                                </Template>
+                                            </DxMenuItem>
+                                            <DxMenuItem Click="HandleLanguageMenuItemClick" Text="@HomePageStaticTexts.English">
+                                                <Template>
+                                                    <div title="@HomePageStaticTexts.English" class="d-flex justify-content-around dropdown-dialog dropdown-menu-item">
+                                                        <img src="/images/united-states.png" class="align-self-center" width="24" height="24" />
+                                                        <span class="align-self-center">@HomePageStaticTexts.English</span>
+                                                    </div>
+                                                </Template>
+                                            </DxMenuItem>
+                                        </Items>
+                                    </DxMenuItem>
+                                </Items>
+                            </DxMenu>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 w-100 doc-content">
+                    <div class="row ml-0 mr-0 w-100 h-100 doc-content-container" id="documentContainer">
+                        @Body
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
