@@ -12,7 +12,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <RunAOTCompilation>true</RunAOTCompilation>
     <UserSecretsId>b577d894-032e-485b-8b23-c5f5fcc3efe4</UserSecretsId>
-    <CodeAnalysisRuleSet>..\..\..\JeevesCoreRules.ruleset</CodeAnalysisRuleSet>
     <NoWarn>$(NoWarn);CA1002</NoWarn>
   </PropertyGroup>
 
